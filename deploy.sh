@@ -36,7 +36,7 @@ function IsCmdInstalled(){
 sysType=`SystemType`
 echo -e "\033[32mCurrent System Type \033[00m<\033[31m${sysType}\033[00m>"
 if [ ${sysType} == "Ubuntu" ]; then
-    installCmd="apt"
+    installCmd="apt-get"
 else
     installCmd="yum"
 fi
@@ -62,4 +62,4 @@ if [ `IsCmdInstalled git` -eq 0 ];then
 fi
 
 #Go doc std chinese version
-git clone git@github.com:polaris1119/pkgdoc.git ~/pkgdoc
+git clone https://github.com/polaris1119/pkgdoc.git ~/pkgdoc
