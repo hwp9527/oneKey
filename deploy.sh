@@ -36,7 +36,7 @@ function IsCmdInstalled(){
 sysType=`SystemType`
 echo -e "\033[32mCurrent System Type \033[00m<\033[31m${sysType}\033[00m>"
 if [ ${sysType} == "Ubuntu" ]; then
-    installCmd="apt-get"
+    installCmd="apt"
 else
     installCmd="yum"
 fi
@@ -52,6 +52,14 @@ cat ./mybashrc.cfg >> ~/.bashrc
 sudo mkdir -p /usr/share/stardict/dic
 sudo tar jxvf stardict.tar.bz2 -C /usr/share/stardict/dic
 
+#Vim configuration
+if [ `IsCmdInstalled vim` -eq 0 ];then
+    vim -c PluginInstall
+    vim -c GoInstallBinaries
+else
+    echo "VIM have not installed!!!"
+fi
+
 #Git configuration
 if [ `IsCmdInstalled git` -eq 0 ];then
     git config --global push.default simples
@@ -59,6 +67,8 @@ if [ `IsCmdInstalled git` -eq 0 ];then
     git config --global user.email hwp195@163.com
     git config --global core.editor vim
     git config --global diff.tool vimdiff
+else
+    echo "GIT have not installed!!!"
 fi
 
 #Go doc std chinese version
