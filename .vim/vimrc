@@ -16,7 +16,6 @@ set rtp+=~/.vim/bundle/Vundle.vim "Run time path
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'fatih/vim-go'
-Plugin 'nsf/gocode'
 call vundle#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

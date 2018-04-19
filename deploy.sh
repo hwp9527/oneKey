@@ -3,7 +3,7 @@
 ## Global var
 sysType="Ubuntu"
 installCmd="apt"
-app="git vim sdcv autojump"
+app="git vim sdcv ctags autojump"
 
 ## Functions
 function SystemType(){
@@ -69,6 +69,14 @@ if [ `IsCmdInstalled git` -eq 0 ];then
     git config --global diff.tool vimdiff
 else
     echo "GIT have not installed!!!"
+fi
+
+#Go configuration
+if [ `IsCmdInstalled go` -eq 0 ];then
+    cd $GOPATH/src
+    go get github.com/nsf/gocode
+else
+    echo "GO have not installed!!!"
 fi
 
 #Go doc std chinese version
