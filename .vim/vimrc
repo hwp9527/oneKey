@@ -2,8 +2,8 @@
 " Description: My VIM configuration for Linux/Windows, Console/GUI
 " Author: He Wei Ping (hwp195)
 " Create: 2012年03月12日
-" Last Change: 2018-04-09 02:13:03
-" Version: 8.0
+" Last Change: 2018-04-22 03:46:42
+" Version: 9.0
 "*************************************************************************
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -29,6 +29,7 @@ map ,bl :%s/\s\+$//<CR> "Delect Extra spaces in the end of each line
 iab xdate <c-r>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 nmap <C-K> :!sdcv <C-R>=expand("<cword>")<CR>
 map ,bu :BufExplorer<CR>
+map ,fm <ESC>gg=G
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ 设置代码折叠
@@ -109,7 +110,7 @@ set stl=[%F]\ %2*%n%m%r%h%w%*\ [FORMAT=%{&ff}:%{&fenc!=''?&fenc:&enc}]\ [TYPE=%Y
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""用户平台
-function! MySys()
+function MySys()
 	if has("win32")
 		return "windows"
 	else

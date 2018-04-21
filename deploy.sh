@@ -3,7 +3,7 @@
 ## Global var
 sysType="Ubuntu"
 installCmd="apt"
-app="git vim sdcv ctags autojump"
+readonly app="git vim sdcv ctags autojump"
 
 ## Functions
 function SystemType(){
@@ -27,13 +27,13 @@ function IsCmdInstalled(){
 	exit 255
     fi  
 
-    [ `which $1` ] && echo "$1: installed" && return 0
+    [[ $(which $1) ]] && echo "$1: installed" && return 0
 
     echo "$1: Not be installed"
     return 1
 }
 
-sysType=`SystemType`
+sysType=$(SystemType)
 echo -e "\033[32mCurrent System Type \033[00m<\033[31m${sysType}\033[00m>"
 if [ ${sysType} == "Ubuntu" ]; then
     installCmd="apt"
