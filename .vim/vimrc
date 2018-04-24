@@ -2,8 +2,8 @@
 " Description: My VIM configuration for Linux/Windows, Console/GUI
 " Author: He Wei Ping (hwp195)
 " Create: 2012年03月12日
-" Last Modified: 星期一 2018年04月23日 22:02:10
-" Modified Times:
+" Last Modified: 星期三 2018年04月25日 00:46:06
+" Modified Times: 19
 "*************************************************************************
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -29,7 +29,7 @@ map ,bl :%s/\s\+$//<CR> "Delect Extra spaces in the end of each line
 iab xdate <c-r>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 nmap <C-K> :!sdcv <C-R>=expand("<cword>")<CR>
 map ,bu :BufExplorer<CR>
-map ,fm <ESC>gg=G
+map <F5> :GoRun %
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ 设置代码折叠
@@ -44,6 +44,9 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 autocmd BufReadPost * if line("'\"") && line("'\"") <= line("$") | exe "normal `\"" | endif
 "Auto imports packages on save
 autocmd BufWritePre *.go :GoImports 
+"Auto format text
+autocmd BufWritePre * ks|call AutoFormat()|'s
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ">>>>>>>>>>>>>>>>>>>>>>   My configuration   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -119,10 +122,9 @@ function MySys()
 endfunction
 
 function AutoFormat()
-    if has("win32")
-	return "windows"
-    else
-	return "linux"
+    if &ft != 'go'
+	exe "normal" "gg=G"
+	exe "normal" "`."
     endif
 endfunction
 
@@ -137,7 +139,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""设置字体
 if has("win32")
-	set guifont=Inconsolata:h12:cANSI
+    set guifont=Inconsolata:h12:cANSI
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -295,13 +297,10 @@ let NERDTreeDirArrows = 0
 
 autocmd BufWritePre,FileWritePre *vimrc   ks|call LastMod()|'s
 fun LastMod()
-    if line("$") > 8
-	let l = 8
-    else
-	let l = line("$")
-    endif
+    let l =  min([line('$'), 8])
     exe "1," . l . "g/Last Modified: /s/Last Modified: .*/Last Modified: " .
-            \ strftime("%A %x %H:%M:%S")
+		\ strftime("%A %x %H:%M:%S")
+    exe "1," . l . "g/Modified Times:/s/\d\+/\=submatch(0) + 1/"
 endfun
 "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 ">>>>>>>>>>>>>>>>>>>>      End Of Vimrc     <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
