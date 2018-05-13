@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ## Global var
+ret=0
 sysType="Ubuntu"
 installCmd="apt"
 readonly app="git vim sdcv ctags autojump"
@@ -27,9 +28,8 @@ function IsCmdInstalled(){
 	exit 255
     fi  
 
-    [[ $(which $1) ]] && echo "$1: installed" && return 0
+    [[ $(which $1) ]] && return 0
 
-    echo "$1: Not be installed"
     return 1
 }
 
@@ -53,7 +53,9 @@ sudo mkdir -p /usr/share/stardict/dic
 sudo tar jxvf stardict.tar.bz2 -C /usr/share/stardict/dic
 
 #Vim configuration
-if [ `IsCmdInstalled vim` -eq 0 ];then
+IsCmdInstalled vim
+ret=$?
+if [ $ret -eq 0 ];then
     vim -c PluginInstall
     vim -c GoInstallBinaries
 else
@@ -61,8 +63,9 @@ else
 fi
 
 #Git configuration
-if [ `IsCmdInstalled git` -eq 0 ];then
-    git config --global push.default simples
+IsCmdInstalled git
+ret=$?
+if [ $ret -eq 0 ];then
     git config --global user.name "hwp9527"
     git config --global user.email hwp195@163.com
     git config --global core.editor vim
@@ -72,12 +75,14 @@ else
 fi
 
 #Go configuration
-if [ `IsCmdInstalled go` -eq 0 ];then
-    cd $GOPATH/src
-    go get github.com/nsf/gocode
+IsCmdInstalled go 
+ret=$?
+if [ $ret -eq 0 ];then
+    cd $GOPATH/src && go get github.com/nsf/gocode
 else
     echo "GO have not installed!!!"
 fi
 
 #Go doc std chinese version
 git clone https://github.com/polaris1119/pkgdoc.git ~/pkgdoc
+
