@@ -2,8 +2,8 @@
 " Description: My VIM configuration for Linux/Windows, Console/GUI
 " Author: He Wei Ping (hwp195)
 " Create: 2012年03月12日
-" Last Modified: 星期三 2018年04月25日 01:41:28
-" Modified Times: 20
+" Last Modified: 星期日 2018年05月27日 18:12:20
+" Modified Times: 27
 "*************************************************************************
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -139,18 +139,14 @@ endfun
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""设置用户目录变量　VIMFILES
+"""""设置系统相关
 if MySys() == "windows"
     let $VIMFILES = $VIM.'/vimfiles'
+    set guifont=DejaVu_Sans_Mono:h12:cANSI
 elseif MySys() == "linux"
     let $VIMFILES = $HOME.'/.vim'
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""设置字体
-if has("win32")
-    set guifont=Inconsolata:h12:cANSI
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""配置多语言环境
