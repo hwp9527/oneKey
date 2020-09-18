@@ -4,7 +4,13 @@
 ret=0
 sysType="Ubuntu"
 installCmd="apt"
-readonly app="git vim sdcv ctags autojump"
+app="git "
+app+="vim "
+app+="sdcv "
+app+="ctags "
+app+="autojump "
+app+="pip "
+app+="pip3 "
 
 ## Functions
 function SystemType(){
@@ -57,7 +63,6 @@ IsCmdInstalled vim
 ret=$?
 if [ $ret -eq 0 ];then
     vim -c PluginInstall
-    vim -c GoInstallBinaries
 else
     echo "VIM have not installed!!!"
 fi
@@ -73,16 +78,4 @@ if [ $ret -eq 0 ];then
 else
     echo "GIT have not installed!!!"
 fi
-
-#Go configuration
-IsCmdInstalled go 
-ret=$?
-if [ $ret -eq 0 ];then
-    cd $GOPATH/src && go get github.com/nsf/gocode
-else
-    echo "GO have not installed!!!"
-fi
-
-#Go doc std chinese version
-git clone https://github.com/polaris1119/pkgdoc.git ~/pkgdoc
 
