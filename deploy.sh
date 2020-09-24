@@ -75,6 +75,7 @@ if [ $ret -eq 0 ];then
     git config --global user.email hwp195@163.com
     git config --global core.editor vim
     git config --global diff.tool vimdiff
+    git config --global core.autocrlf input
 else
     echo "GIT have not installed!!!"
 fi
